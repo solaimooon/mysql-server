@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    ports:
+      - "3307:3306"
+
+    networks:
+      - shared_net
+
+    restart: always
+
+
+volumes:
+  mysql_data:
+    external: true
+    name: educational-management-dockrised_mysql_data
+
+networks:
+  shared_net:
+    external: true
